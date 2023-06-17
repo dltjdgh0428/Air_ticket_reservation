@@ -1,7 +1,7 @@
 package com.example.ticketmybatis.service;
 
-import com.example.ticketmybatis.domain.Ticket;
-import com.example.ticketmybatis.entity.TicketEntity;
+import com.example.ticketmybatis.domain.Reservation;
+import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 
@@ -31,10 +31,10 @@ public class TicketService {
     /**
      * 전체 도서 목록 조회
      */
-    public List<Ticket.Simple> findTickets() {
-        List<Ticket.Simple> list = new ArrayList<>();
-        for (TicketEntity ticketEntity : ticketRepository.findAll()) {
-            Ticket.Simple ticket = new Ticket.Simple();
+    public List<Reservation.Simple> findTickets() {
+        List<Reservation.Simple> list = new ArrayList<>();
+        for (ReservationEntity ticketEntity : ticketRepository.findAll()) {
+            Reservation.Simple ticket = new Reservation.Simple();
             ticket.setReservation_id(ticketEntity.getReservation_id());
             ticket.setReservation_name(ticketEntity.getReservation_name());
             ticket.setPassport(ticketEntity.getPassport());
@@ -46,16 +46,16 @@ public class TicketService {
     /**
      * 조건에 맞는 도서 목록 조회
      */
-    public List<Ticket.Simple> findCondTickets(Ticket.Create ticketForm) {
-        TicketEntity ticketEntity = new TicketEntity();
+    public List<Reservation.Simple> findCondTickets(Reservation.Create ticketForm) {
+        ReservationEntity ticketEntity = new ReservationEntity();
         ticketEntity.setReservation_id(ticketForm.getReservation_id());
         ticketEntity.setReservation_name(ticketForm.getReservation_name());
         ticketEntity.setPassport(ticketForm.getPassport());
 
-        List<Ticket.Simple> list = new ArrayList<>();
-        for(TicketEntity ticketEntity2 : ticketRepository.findCond(ticketEntity)) {
+        List<Reservation.Simple> list = new ArrayList<>();
+        for(ReservationEntity ticketEntity2 : ticketRepository.findCond(ticketEntity)) {
 //        for(TicketEntity ticketEntity2 : ticketRepository.findCond(ticketForm.getName(), ticketForm.getPublisher())) {
-            Ticket.Simple ticket2 = new Ticket.Simple();
+            Reservation.Simple ticket2 = new Reservation.Simple();
             ticket2.setReservation_id(ticketEntity2.getReservation_id());
             ticket2.setReservation_name(ticketEntity2.getReservation_name());
             ticket2.setPassport(ticketEntity2.getPassport());
@@ -67,8 +67,8 @@ public class TicketService {
     /**
      * 도서추가
      */
-    public Long addTicket(Ticket.Create ticketForm) {
-        TicketEntity ticketEntity = new TicketEntity();
+    public Long addTicket(Reservation.Create ticketForm) {
+        ReservationEntity ticketEntity = new ReservationEntity();
         ticketEntity.setReservation_id(ticketForm.getReservation_id());
         ticketEntity.setReservation_name(ticketForm.getReservation_name());
         ticketEntity.setPassport(ticketForm.getPassport());
@@ -76,8 +76,8 @@ public class TicketService {
         return ticketEntity.getReservation_id();
     }
 
-    public void updateTicketService(Long ticketId, Ticket.Update updateForm) {
-        TicketEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
+    public void updateTicketService(Long ticketId, Reservation.Update updateForm) {
+        ReservationEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
                 IllegalArgumentException::new
         );
 
@@ -88,14 +88,14 @@ public class TicketService {
         ticketRepository.save(ticketEntity);
     }
 
-    public TicketEntity getTicketById(Long ticketId) {
+    public ReservationEntity getTicketById(Long ticketId) {
         return ticketRepository.findById(ticketId).orElseThrow(
                 IllegalArgumentException::new
         );
     }
 
     public void deleteTicket(Long ticketId) {
-        TicketEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
+        ReservationEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
                 IllegalArgumentException::new
         );
 

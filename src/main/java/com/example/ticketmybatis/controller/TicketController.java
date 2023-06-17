@@ -1,7 +1,7 @@
 package com.example.ticketmybatis.controller;
 
-import com.example.ticketmybatis.domain.Ticket;
-import com.example.ticketmybatis.entity.TicketEntity;
+import com.example.ticketmybatis.domain.Reservation;
+import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class TicketController {
     @RequestMapping(value = "/") //원래는 getMapping에 경로는 tickets
     public String list(Model model) {
         System.out.println("*** tickets mapping *** ");
-        List<Ticket.Simple> tickets = ticketService.findTickets();
+        List<Reservation.Simple> tickets = ticketService.findTickets();
         model.addAttribute("tickets", tickets);
         return "tickets/ticketList";
     }
@@ -42,7 +42,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/tickets/new")          //ticketform에서 받은 데이터 반영
-    public String create(Ticket.Create form) {
+    public String create(Reservation.Create form) {
         ticketService.addTicket(form);
         return "redirect:/";
     }
@@ -55,21 +55,21 @@ public class TicketController {
 
 
     @PostMapping(value = "/tickets/search")                                //ticketSearchform에서 받은 데이터 반영
-    public String search(Ticket.Create form, Model model) {
-        List<Ticket.Simple> tickets = ticketService.findCondTickets(form);
+    public String search(Reservation.Create form, Model model) {
+        List<Reservation.Simple> tickets = ticketService.findCondTickets(form);
         model.addAttribute("tickets", tickets);
         return "tickets/ticketList";
     }
 
     @GetMapping("/tickets/{ticketId}/update")
     public String getMemberUpdateForm(@PathVariable Long ticketId, Model model) {
-        TicketEntity ticketEntity = ticketService.getTicketById(ticketId);
+        ReservationEntity ticketEntity = ticketService.getTicketById(ticketId);
         model.addAttribute("ticket", ticketEntity);
         return "tickets/updateTicketForm";
     }
 
     @PostMapping("/tickets/{ticketId}")
-    public String updateTicket(@PathVariable Long ticketId, Ticket.Update updateForm) {
+    public String updateTicket(@PathVariable Long ticketId, Reservation.Update updateForm) {
         ticketService.updateTicketService(ticketId, updateForm);
         return "redirect:/tickets/" + ticketId;
     }
@@ -77,7 +77,7 @@ public class TicketController {
     @GetMapping("/tickets/{ticketId}")
     public String getTicketById(@PathVariable Long ticketId, Model model) {
 
-        List<TicketEntity> ticketSimpleListSingle = new LinkedList<>();
+        List<ReservationEntity> ticketSimpleListSingle = new LinkedList<>();
         ticketSimpleListSingle.add(ticketService.getTicketById(ticketId));
 
         model.addAttribute("tickets", ticketSimpleListSingle);
@@ -86,7 +86,7 @@ public class TicketController {
 
     @GetMapping("/tickets/{ticketId}/delete")
     public String getTicketDeleteForm(@PathVariable Long ticketId, Model model) {
-        TicketEntity ticketEntity = ticketService.getTicketById(ticketId);
+        ReservationEntity ticketEntity = ticketService.getTicketById(ticketId);
         model.addAttribute("ticket", ticketEntity);
         return "tickets/deleteTicketForm";
     }

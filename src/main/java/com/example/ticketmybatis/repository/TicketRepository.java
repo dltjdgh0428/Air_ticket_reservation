@@ -1,17 +1,17 @@
 package com.example.ticketmybatis.repository;
 
-import com.example.ticketmybatis.entity.TicketEntity;
+import com.example.ticketmybatis.entity.ReservationEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface TicketRepository {
-    void save(TicketEntity ticketEntity);
+    void save(ReservationEntity ticketEntity);
 
-    List<TicketEntity> findAll();
+    List<ReservationEntity> findAll();
 
-    List<TicketEntity> findCond(TicketEntity ticketEntity);
-    Optional<TicketEntity> findById(Long ticketId);
+    List<ReservationEntity> findCond(ReservationEntity ticketEntity);
+    Optional<ReservationEntity> findById(Long ticketId);
 
-    void delete(TicketEntity ticketEntity);
+    void delete(ReservationEntity ticketEntity);
 }
