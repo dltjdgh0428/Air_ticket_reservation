@@ -6,17 +6,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "reservation")
-public class TicketEntity {
+@Entity(name = "airport")
+public class AirportEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservation_id;
+    private Long airport_id;
 
     @Column
-    private String reservation_name;
+    private String country;
 
     @Column
-    private String passport;
+    private String city;
 
+    @Column
+    private String code;
 }

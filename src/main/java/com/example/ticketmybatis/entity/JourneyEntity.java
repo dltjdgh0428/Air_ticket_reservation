@@ -1,5 +1,7 @@
 package com.example.ticketmybatis.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +16,16 @@ public class JourneyEntity {
     private Long journey_id;
 
     @Column
-    private String country;
+    private Date d_time;
 
     @Column
-    private String city;
+    private Date a_time;
 
-    @Column
-    private String code;
+    @ManyToOne
+    @JoinColumn(name = "airport")
+    private Long d_airport_id;
+
+    @ManyToOne
+    @JoinColumn(name = "airport")
+    private Long a_airport_id;
 }
