@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .tForm {
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1><a href="/">항공권 검색결과</a> </h1>
+        <div class="tContainer">
+            <div class="tForm" th:each="ticket : ${tickets}">
+                <p th:text="출발시간 : ${ticket.d_time}">출발시간</p>
+                <p th:text="도착시간 : ${ticket.a_time}">도착시간</p>
+                <p th:text="항공사/기종 : ${}">항공사/기종</p>
+            </div>
+            <div class="tForm" th:each="ticket : ${tickets}">
+                <p th:text="출발시간 : ${ticket.d_time}">출발시간</p>
+                <p th:text="도착시간 : ${ticket.a_time}">도착시간</p>
+                <p th:text="항공사/기종 : ${}">항공사/기종</p>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

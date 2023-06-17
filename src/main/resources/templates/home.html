@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="http://unpkg.com/mvp.css">
+</head>
+<body>
+<div class="container">
+  <div>
+
+    <h1><a href="/">항공 예매🎫</a> </h1>
+    <p>
+      <button onclick="location.href='/tickets'">여행 검색</button >
+    </p>
+    <p>
+      <button onclick="location.href='/tickets/search'">예약 정보 검색</button >
+    </p>
+  </div>
+</div> <!-- /container -->
+
+<form action="/tickets" method="post">
+  <div class="form-group">
+    <!--        <label for="name">🛫출발지</label>-->
+    <!--        <select class="form-select">-->
+    <!--            <option value="">선택하세요</option>-->
+    <!--            <option th:each="book : ${books}" th:value="${book.id}"-->
+    <!--                    th:text="${book.name}">FAST</option>-->
+    <!--        </select>-->
+    <!--        <label for="name">🛬도착지</label>-->
+    <!--        <select>-->
+    <!--            <option value="">선택하세요</option>-->
+    <!--            <option value="apple">사과</option>-->
+    <!--            <option value="banana">바나나</option>-->
+    <!--            <option value="orange">오렌지</option>-->
+    <!--        </select>-->
+    <!--        <label for="name">가는 날짜</label>-->
+    <!--        <select>-->
+    <!--            <option value="">선택하세요</option>-->
+    <!--            <option value="apple">사과</option>-->
+    <!--            <option value="banana">바나나</option>-->
+    <!--            <option value="orange">오렌지</option>-->
+    <!--        </select>-->
+    <!--        <label for="name">오는 날짜</label>-->
+    <!--        <select>-->
+    <!--            <option value="">선택하세요</option>-->
+    <!--            <option value="apple">사과</option>-->
+    <!--            <option value="banana">바나나</option>-->
+    <!--            <option value="orange">오렌지</option>-->
+    <!--        </select>-->
+  </div>
+  <!--    <button type="submit">검색</button>-->
+</form>
+
+<form action="/tickets/search" method="post">
+  <div class="form-group">
+    <p><label for="name">여권번호</label>
+      <input type="text" id="name" name="name" placeholder="여권번호를 입력하세요">
+    </p>
+  </div>
+  <button type="submit">검색</button>
+</form>
+
+
+</body>
+</html>
