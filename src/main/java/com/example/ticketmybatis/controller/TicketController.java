@@ -26,7 +26,10 @@ public class TicketController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        System.out.println("*** tickets mapping *** ");
+        List<Journey.Simple> tickets = buyTicketService.findBuyTickets();
+        model.addAttribute("tickets", tickets);
         return "home";
     }
 

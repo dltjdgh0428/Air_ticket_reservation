@@ -10,27 +10,28 @@
   <div class="form-group">
     <label for="name">🛫출발지</label>
     <select class="form-select">
-      <option value="">선택하세요</option>
-      <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
-              th:text="${ticket.name}">FAST</option>
+      <option selected>선택하세요</option>
+
+      <option th:each="ticket : ${tickets}" th:value="${ticket.d_airport}"
+              th:text="${ticket.d_airport}"></option>
     </select>
     <label for="name">🛬도착지</label>
     <select>
-      <option value="">선택하세요</option>
-      <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
-              th:text="${ticket.name}">FAST</option>
+      <option selected>선택하세요</option>
+      <option th:each="ticket : ${tickets}" th:value="${ticket.a_airport}"
+              th:text="${ticket.a_airport}"></option>
     </select>
     <label for="name">가는 날짜</label>
     <select>
-      <option value="">선택하세요</option>
-      <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
-              th:text="${ticket.name}">FAST</option>
+      <option selected>선택하세요</option>
+      <option th:each="ticket : ${tickets}" th:value="${ticket.d_time}"
+              th:text="${ticket.d_time}"></option>
     </select>
     <label for="name">오는 날짜</label>
     <select>
-      <option value="">선택하세요</option>
-      <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
-              th:text="${ticket.name}">FAST</option>
+      <option selected>선택하세요</option>
+      <option th:each="ticket : ${tickets}" th:value="${ticket.a_time}"
+              th:text="${ticket.a_time}">FAST</option>
     </select>
     <button action="submit">검색</button>
   </div>
