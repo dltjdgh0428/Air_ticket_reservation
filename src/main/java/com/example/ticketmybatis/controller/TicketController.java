@@ -28,7 +28,8 @@ public class TicketController {
         return "home";
     }
 
-    @RequestMapping(value = "/")
+
+    @RequestMapping(value = "/") //원래는 getMapping에 경로는 tickets
     public String list(Model model) {
         System.out.println("*** tickets mapping *** ");
         List<Ticket.Simple> tickets = ticketService.findTickets();

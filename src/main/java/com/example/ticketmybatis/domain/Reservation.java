@@ -2,7 +2,7 @@ package com.example.ticketmybatis.domain;
 
 import lombok.Data;
 
-public class Ticket {
+public class Reservation {
 
     @Data
     public static class Create{
