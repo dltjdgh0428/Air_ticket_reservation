@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class TicketController {
         return "home";
     }
 
-    @GetMapping(value = "/tickets")
+    @RequestMapping(value = "/") //원래는 getMapping에 경로는 tickets
     public String list(Model model) {
         System.out.println("*** tickets mapping *** ");
         List<Ticket.Simple> tickets = ticketService.findTickets();

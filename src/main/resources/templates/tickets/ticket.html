@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1><a href="/">항공 예매🎫</a> </h1>
+
+        <div class="form-group">
+            <label for="name">🛫출발지</label>
+            <select class="form-select">
+                <option value="">선택하세요</option>
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.name}">FAST</option>
+            </select>
+            <label for="name">🛬도착지</label>
+            <select>
+                <option value="">선택하세요</option>
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.name}">FAST</option>
+            </select>
+            <label for="name">가는 날짜</label>
+            <select>
+                <option value="">선택하세요</option>
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.publisher}">FAST</option>
+            </select>
+            <label for="name">오는 날짜</label>
+            <select>
+                <option value="">선택하세요</option>
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.price}">FAST</option>
+            </select>
+        </div>
+        <button type="submit">검색</button>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
