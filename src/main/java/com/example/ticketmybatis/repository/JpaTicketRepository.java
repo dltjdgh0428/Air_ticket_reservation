@@ -1,6 +1,6 @@
 package com.example.ticketmybatis.repository;
 
-import com.example.ticketmybatis.entity.TicketEntity;
+import com.example.ticketmybatis.entity.ReservationEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -14,35 +14,35 @@ public class JpaTicketRepository implements TicketRepository {
     public JpaTicketRepository(EntityManager em) { this.em = em;}
 
     @Override
-    public void save(TicketEntity ticket) {
+    public void save(ReservationEntity ticket) {
         em.persist(ticket);
     }
 
     @Override
-    public List<TicketEntity> findAll() {
-        List<TicketEntity> result = em.createQuery("select * from reservation", TicketEntity.class)          //JPQL 이라는 쿼리 사용
+    public List<ReservationEntity> findAll() {
+        List<ReservationEntity> result = em.createQuery("select * from reservation", ReservationEntity.class)          //JPQL 이라는 쿼리 사용
                 .getResultList();
         return result;
     }
 
     @Override
-    public Optional<TicketEntity> findById(Long id) {
-        TicketEntity ticket = em.find(TicketEntity.class, id);
+    public Optional<ReservationEntity> findById(Long id) {
+        ReservationEntity ticket = em.find(ReservationEntity.class, id);
         return Optional.ofNullable(ticket);
     }
 
     @Override
-    public List<TicketEntity> findCond(TicketEntity ticket) {
+    public List<ReservationEntity> findCond(ReservationEntity ticket) {
         String jpql = "select b from ticket b where b.name LIKE concat('%', :inputName, '%') and b.publisher LIKE concat('%', :inputPublisher, '%')";
-        TypedQuery<TicketEntity> query = em.createQuery(jpql, TicketEntity.class);
+        TypedQuery<ReservationEntity> query = em.createQuery(jpql, ReservationEntity.class);
         query.setParameter("inputId", ticket.getReservation_id());
         query.setParameter("inputName", ticket.getReservation_name());
-        List<TicketEntity> result = query.getResultList();
+        List<ReservationEntity> result = query.getResultList();
         return result;
     }
 
     @Override
-    public void delete(TicketEntity ticket) {
+    public void delete(ReservationEntity ticket) {
         System.out.println("*** Repository.delete 시작 ***");
         em.remove(ticket);
     }
