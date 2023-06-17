@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,12 +28,12 @@ public class TicketController {
         return "home";
     }
 
-    @GetMapping(value = "/tickets")
+    @RequestMapping(value = "/")
     public String list(Model model) {
         System.out.println("*** tickets mapping *** ");
         List<Ticket.Simple> tickets = ticketService.findTickets();
         model.addAttribute("tickets", tickets);
-        return "tickets/ticketList";
+        return "home";
     }
 
     @GetMapping(value = "/tickets/new") //도서 입력 화면 데이터 인수
