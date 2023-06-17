@@ -21,11 +21,11 @@ public class JourneyEntity {
     @Column
     private Date a_time;
 
-    @ManyToOne
-    @JoinColumn(name = "airport")
-    private Long d_airport_id;
-
-    @ManyToOne
-    @JoinColumn(name = "airport")
-    private Long a_airport_id;
+//    @ManyToOne
+//    @JoinColumn(name = "airport", insertable = false,updatable = false)
+//    private AirportEntity d_airport_id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "airport", insertable = false,updatable = false)
+//    private AirportEntity a_airport_id;
 }

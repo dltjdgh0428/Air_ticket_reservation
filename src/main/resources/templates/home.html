@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1><a href="/">항공 예매 시스템🎫 </a> </h1>
-<form action="/tickets/search" method="post">
+<form action="/tickets/buy" method="post">
   <div class="form-group">
     <label for="name">🛫출발지</label>
     <select class="form-select">
@@ -32,10 +32,12 @@
       <option th:each="ticket : ${tickets}" th:value="${ticket.id}"
               th:text="${ticket.name}">FAST</option>
     </select>
-
-    <button type="submit">검색</button>
+    <button action="submit">검색</button>
   </div>
 </form>
+<!--  포스트요청이 불가능하기에 form박스 밖으로뺐음-->
+<button onclick="location.href='/tickets'">전체 검색</button>
+
 <form action="/tickets/search" method="post">
   <div class="form-group">
     <label for="name">여권번호</label>
@@ -43,5 +45,6 @@
     <button type="submit">검색</button>
   </div>
 </form>
+
 </body>
 </html>

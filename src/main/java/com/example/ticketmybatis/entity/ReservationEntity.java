@@ -19,12 +19,12 @@ public class ReservationEntity {
     @Column
     private String passport;
 
-    @ManyToOne
-    @JoinColumn(name="journey")
-    private Long journey_id;
-
-    @ManyToOne
-    @JoinColumn(name="seat")
-    private Long seat_id;
+//    @ManyToOne
+//    @JoinColumn(name="journey", insertable = false,updatable = false)
+//    private JourneyEntity journey_id;
+//
+//    @ManyToOne
+//    @JoinColumn(name="seat", insertable = false,updatable = false)
+//    private SeatEntity seat_id;
 
 }

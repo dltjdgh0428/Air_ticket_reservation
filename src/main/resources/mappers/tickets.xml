@@ -2,32 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.ticketmybatis.repository.MybatisTicketRepository">
-    <select id="findAll" resultType="TicketEntity">
-        select
-            *
-        from
-            reservation
+<mapper namespace="com.example.ticketmybatis.repository.MybatisReservationRepository">
+    <select id="findAllReservation" resultType="ReservationEntity">
+        select * from reservation;
+    </select>
+    <select id="findAllJourney" resultType="JourneyEntity">
+        select * from journey;
     </select>
 
-    <select id="findCond" parameterType="TicketEntity" resultType="TicketEntity">
-        select
-        *
-        from
-        reservation
+    <select id="findCondReservation" parameterType="ReservationEntity" resultType="ReservationEntity">
+        select * from reservation
 <!--        ticket-->
 <!--        where name like concat('%',#{name}, '%')-->
 <!--        and publisher like concat('%',#{publisher}, '%');-->
     </select>
 
-    <insert id="save" parameterType="TicketEntity" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into reservation
-        (reservation_id, reservation_name, passport)
-        values
-        (#{reservation_id}, #{reservation_name}, #{passport})
-    </insert>
 
-    <select id="findById" parameterType="Long" resultType="TicketEntity">
+    <select id="findByIdReservation" parameterType="Long" resultType="ReservationEntity">
         select
         *
         from
@@ -36,14 +27,7 @@
         reservation_id = #{reservation_id}
     </select>
 
-    <update id="update" parameterType="TicketEntity">
-        update reservation set
-        reservation_id = #{reservation_id}, reservation_name = #{reservation_name}, passport = #{passport}
-        where
-        reservation_id = #{reservation_id}
-    </update>
-
-    <delete id="delete" parameterType="TicketEntity">
+    <delete id="delete" parameterType="ReservationEntity">
         delete from reservation
         where
         reservation_id = #{reservation_id}
