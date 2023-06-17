@@ -12,6 +12,7 @@
             float: left;
             margin-bottom:10px;
             border-radius: 10px 0px 0px 10px;
+            display:flex;
         }
         #box2{
             padding-left:10px;
@@ -21,6 +22,12 @@
             height: 120px;
             float: left;
             border-radius: 0px 10px 10px 0px;
+            text-align:center;
+        }
+        .zzz{
+            display: flex;
+            text-align:center;
+            align-items: center;
         }
     </style>
 </head>
@@ -31,12 +38,19 @@
         <div class="tContainer">
             <div th:each="ticket : ${tickets}">
                 <div id="box1">
-                    <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
-                    <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
-                    <p>항공사/기종</p>
+                    <div class="depart">
+                        <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
+                        <p>출발공항: <span th:text="${ticket.d_airport}"></span></p>
+                        <p>항공사/기종</p>
+                    </div>
+                    <div class="zzz">-----></div>
+                    <div class="arrive">
+                        <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
+                        <p>도착공항: <span th:text="${ticket.a_airport}"></span></p>
+                    </div>
                 </div>
                 <div id="box2">
-                    <p>가격: 1억</p>
+                    <p>₩:329,100</p>
                     <button onclick="location.href='/tickets/buy'">구매하기</button>
                 </div>
             </div>

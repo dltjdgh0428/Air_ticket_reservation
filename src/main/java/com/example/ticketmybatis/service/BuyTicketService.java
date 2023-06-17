@@ -28,6 +28,8 @@ public class BuyTicketService {
             ticket.setJourney_id(ticketEntity.getJourney_id());
             ticket.setD_time(ticketEntity.getD_time());
             ticket.setA_time(ticketEntity.getA_time());
+            ticket.setD_airport(ticketEntity.getD_airport());
+            ticket.setA_airport(ticketEntity.getA_airport());
             list.add(ticket);
         }
         return list;
@@ -41,6 +43,8 @@ public class BuyTicketService {
         ticketEntity.setJourney_id(ticketForm.getJourney_id());
         ticketEntity.setD_time((Date) ticketForm.getD_time());
         ticketEntity.setA_time((Date) ticketForm.getA_time());
+        ticketEntity.setD_airport(ticketForm.getD_airport());
+        ticketEntity.setA_airport(ticketForm.getA_airport());
 
         List<Journey.Simple> list = new ArrayList<>();
         for(JourneyEntity ticketEntity2 : buyTicketRepository.findCondJourney(ticketEntity)) {
@@ -49,6 +53,8 @@ public class BuyTicketService {
             ticket2.setJourney_id(ticketEntity2.getJourney_id());
             ticket2.setD_time(ticketEntity2.getD_time());
             ticket2.setA_time(ticketEntity2.getA_time());
+            ticket2.setD_airport(ticketForm.getD_airport());
+            ticket2.setA_airport(ticketForm.getA_airport());
             list.add(ticket2);
         }
         return list;

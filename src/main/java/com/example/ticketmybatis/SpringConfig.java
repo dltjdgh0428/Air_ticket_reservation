@@ -27,12 +27,10 @@ public class SpringConfig {
 
     @Bean
     public MyTicketService myTicketService(){
-//        return new TicketService(ticketRepository); // myBatis와 dataJPA용
         return new MyTicketService(ticketRepository());
     }
     @Bean
     public BuyTicketService buyTicketService(){
-//        return new TicketService(ticketRepository); // myBatis와 dataJPA용
         return new BuyTicketService((BuyTicketRepository) ticketRepository());
     }
 
