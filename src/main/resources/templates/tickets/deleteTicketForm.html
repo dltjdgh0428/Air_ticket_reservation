@@ -6,31 +6,19 @@
 </head>
 <body>
 <div class="container">
-    <h2>도서 정보 삭제하기 </h2>
-    <h4>아래 도서 정보를 삭제하시겠습니까? </h4>
+    <h2>여권 취소하기 </h2>
+    <h4>아래와 같은 티켓을 취소하시겠습니까?</h4>
 
-    <form th:action="@{/tickets/{uid}/delete(uid = ${ticket.id})}" th:method="post">
-
-        <table border="1">
-            <tr>
-                <td>id</td>
-                <td th:text="${ticket.id}"></td>
-            </tr>
-            <tr>
-                <td>name</td>
-                <td th:text="${ticket.name}"></td>
-            </tr>
-            <tr>
-                <td>publisher</td>
-                <td th:text="${ticket.publisher}"></td>
-            </tr>
-            <tr>
-                <td>price</td>
-                <td th:text="${ticket.price}"></td>
-            </tr>
-        </table>
-        <p></p>
-        <button type="submit">삭제</button>
+    <form th:action="@{/tickets/{uid}/delete(uid = ${myTicket.reservation_id})}" th:method="post">
+        <p>예약 No: <span th:text="${myTicket.reservation_id}"></span></p>
+        <p>여권번호: <span th:text="${myTicket.passport}"></span></p>
+        <p>이름: <span th:text="${myTicket.reservation_name}"></span></p>
+        <p>출발시간: <span th:text="${myTicket.journey_id.d_time}"></span></p>
+        <p>출발공항: <span th:text="${myTicket.journey_id.d_airport_id.country}"></span></p>
+        <p>도착시간: <span th:text="${myTicket.journey_id.a_time}"></span></p>
+        <p>도착공항: <span th:text="${myTicket.journey_id.a_airport_id.country}"></span></p>
+        <p>좌석정보: <span th:text="${myTicket.seat}"></span></p>
+        <button type="submit">취소</button>
     </form>
 </div> <!-- /container -->
 </body>

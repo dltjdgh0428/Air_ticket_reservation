@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,7 +42,6 @@ public class TicketController {
     public String home(Model model) {
         System.out.println("*** tickets mapping *** ");
         List<Airport.Simple> tickets = TicketService.findTickets();
-
         System.out.println("*** tickets mapping *** " + tickets.get(0).getAirport_id());
         model.addAttribute("tickets", tickets);
         return "home";
@@ -55,7 +55,14 @@ public class TicketController {
         System.out.println("*** tickets mapping *** ");
         List<Journey.Simple> tickets = buyTicketService.findBuyTickets();
         model.addAttribute("tickets", tickets);
-        return "home";
+        return "tickets/ticketList";
+    }
+    @GetMapping(value = "/tickets/my") //원래는 getMapping에 경로는 tickets
+    public String mylist(Model model) {
+        System.out.println("*** tickets mapping *** ");
+        List<Reservation.Simple> myTickets = myTicketService.findMyTickets();
+        model.addAttribute("myTickets", myTickets);
+        return "tickets/myTicketForm";
     }
 
     @GetMapping(value = "/tickets/buy/{journeyId}")
@@ -74,9 +81,20 @@ public class TicketController {
         System.out.println(form.getSeat());
         System.out.println(form.getJourney_id());
         //model.addAttribute("tickets", tickets);
+        return "tickets/buyTicketForm";
+    }
+    
+    @PostMapping(value = "/tickets")   //홈에서 선택한 데이터 반영
+    public String search(@RequestParam("d_city") Long d_id, @RequestParam("a_city") Long a_id, @RequestParam("d_time") String d_time, @RequestParam("a_time") String a_time, Model model){
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<Ddd>>>>>>>>>>>>>>>>>>>>>>>");
+        // 포맷터
+        //SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+
+        System.out.println(d_id + a_id + d_time + a_time);
+        List<Journey.Simple> tickets = ticketService.findCondTickets(d_id, a_id, d_time, a_time);
+        model.addAttribute("tickets", tickets);
         return "tickets/ticketList";
     }
-
     @GetMapping("/tickets/{ticketId}")
     public String getTicketById(@PathVariable Long ticketId, Model model) {
 
@@ -87,18 +105,21 @@ public class TicketController {
         return "tickets/ticketList";
     }
 
-    @GetMapping("/tickets/{ticketId}/delete")
-    public String getTicketDeleteForm(@PathVariable Long ticketId, Model model) {
-        ReservationEntity ticketEntity = myTicketService.getTicketById(ticketId);
-        model.addAttribute("ticket", ticketEntity);
+    @GetMapping("/tickets/{reservationId}/delete")
+    public String getTicketDeleteForm(@PathVariable Long reservationId, Model model) {
+        ReservationEntity reservationEntity = myTicketService.getTicketById(reservationId);
+        model.addAttribute("myTicket", reservationEntity);
+        System.out.println(reservationEntity);
         return "tickets/deleteTicketForm";
     }
 
-    @PostMapping("/tickets/{ticketId}/delete")
-    public String getTicketDelete(@PathVariable Long ticketId, Model model) {
-        model.addAttribute("id", ticketId);
-        myTicketService.deleteTicket(ticketId);
+    @PostMapping("/tickets/{reservationId}/delete")
+    public String getTicketDelete(@PathVariable Long reservationId, Model model) {
+        model.addAttribute("id", reservationId);
+        myTicketService.deleteTicket(reservationId);
         return "redirect:/tickets";
     }
+
+
 
 }

@@ -40,17 +40,24 @@
                 <div id="box1">
                     <div class="depart">
                         <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
-                        <p>출발공항: <span th:text="${ticket.d_airport}"></span></p>
-                        <p>항공사/기종</p>
+                        <p>출발공항:
+                            <span th:text="${ticket.d_airport_id.country}"></span>
+                            <span th:text="${ticket.d_airport_id.city}"></span>
+                            <span th:text="${ticket.d_airport_id.code}"></span>
+                        </p>
                     </div>
                     <div class="zzz">-----></div>
                     <div class="arrive">
                         <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
-                        <p>도착공항: <span th:text="${ticket.a_airport}"></span></p>
+                        <p>도착공항:
+                            <span th:text="${ticket.a_airport_id.country}"></span>
+                            <span th:text="${ticket.a_airport_id.city}"></span>
+                            <span th:text="${ticket.a_airport_id.code}"></span>
+                        </p>
                     </div>
                 </div>
                 <div id="box2">
-                    <p>₩:329,100</p>
+                    <p>₩<span th:text="${ticket.price}"></span></p>
                     <button onclick="location.href='/tickets/buy'">구매하기</button>
                 </div>
             </div>

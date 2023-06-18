@@ -2,7 +2,6 @@ package com.example.ticketmybatis.entity;
 
 import java.sql.Date;
 
-import com.example.ticketmybatis.domain.Airport;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +25,10 @@ public class JourneyEntity {
     private Long price;
 
     @ManyToOne
-    @JoinColumn(name = "d_airport_id", referencedColumnName = "airport_id",insertable=false, updatable=false)
+    @JoinColumn(name = "d_airport_id", referencedColumnName = "airport_id")
     private AirportEntity d_airport_id;
 
     @ManyToOne
-    @JoinColumn(name = "a_airport_id", referencedColumnName = "airport_id",insertable=false, updatable=false)
+    @JoinColumn(name = "a_airport_id", referencedColumnName = "airport_id")
     private AirportEntity a_airport_id;
 }

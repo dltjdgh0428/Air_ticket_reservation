@@ -8,8 +8,10 @@ import com.example.ticketmybatis.entity.JourneyEntity;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.repository.TicketRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -44,60 +46,27 @@ public class TicketService {
     /**
      * 조건에 맞는 도서 목록 조회
      */
-    public List<Reservation.Simple> findCondTickets(Reservation.Create ticketForm) {
-        ReservationEntity ticketEntity = new ReservationEntity();
-        ticketEntity.setReservation_id(ticketForm.getReservation_id());
-        ticketEntity.setReservation_name(ticketForm.getReservation_name());
-        ticketEntity.setPassport(ticketForm.getPassport());
+    public List<Journey.Simple> findCondTickets(Long d_city, Long a_city, String d_time, String a_time) {
 
-        List<Reservation.Simple> list = new ArrayList<>();
-        for(ReservationEntity ticketEntity2 : ticketRepository.findCond(ticketEntity)) {
+        System.out.println("<<<findCondTickets>>>");
+        List<Journey.Simple> list = new ArrayList<>();
+        for(JourneyEntity ticketEntity2 : ticketRepository.findCond(d_city, a_city, d_time, a_time)) {
 //        for(TicketEntity ticketEntity2 : ticketRepository.findCond(ticketForm.getName(), ticketForm.getPublisher())) {
-            Reservation.Simple ticket2 = new Reservation.Simple();
-            ticket2.setReservation_id(ticketEntity2.getReservation_id());
-            ticket2.setReservation_name(ticketEntity2.getReservation_name());
-            ticket2.setPassport(ticketEntity2.getPassport());
+            Journey.Simple ticket2 = new Journey.Simple();
+            ticket2.setJourney_id(ticketEntity2.getJourney_id());
+            ticket2.setD_airport_id(ticketEntity2.getD_airport_id());
+            ticket2.setA_airport_id(ticketEntity2.getA_airport_id());
+            ticket2.setD_time(ticketEntity2.getD_time());
+            ticket2.setA_time(ticketEntity2.getA_time());
+            ticket2.setPrice(ticketEntity2.getPrice());
             list.add(ticket2);
+        }
+        if(!list.isEmpty()) {
+            System.out.println("*** getJourney_id : " + list.get(0).getJourney_id());
+        } else {
+            System.out.println("*** getJourney_id : Empty");
         }
         return list;
     }
 
-    /**
-     * 도서추가
-     */
-    public Long addTicket(Reservation.Create ticketForm) {
-        ReservationEntity ticketEntity = new ReservationEntity();
-        ticketEntity.setReservation_id(ticketForm.getReservation_id());
-        ticketEntity.setReservation_name(ticketForm.getReservation_name());
-        ticketEntity.setPassport(ticketForm.getPassport());
-        ticketRepository.save(ticketEntity);
-        return ticketEntity.getReservation_id();
-    }
-
-    public void updateTicketService(Long ticketId, Reservation.Update updateForm) {
-        ReservationEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
-                IllegalArgumentException::new
-        );
-
-        ticketEntity.setReservation_id(updateForm.getReservation_id());
-        ticketEntity.setReservation_name(updateForm.getReservation_name());
-        ticketEntity.setPassport(updateForm.getPassport());
-//        ticketRepository.update(ticketEntity);
-        ticketRepository.save(ticketEntity);
-    }
-
-    public ReservationEntity getTicketById(Long ticketId) {
-        return ticketRepository.findById(ticketId).orElseThrow(
-                IllegalArgumentException::new
-        );
-    }
-
-    public void deleteTicket(Long ticketId) {
-        ReservationEntity ticketEntity = ticketRepository.findById(ticketId).orElseThrow(
-                IllegalArgumentException::new
-        );
-
-        ticketRepository.delete(ticketEntity);
-    }
 }
-

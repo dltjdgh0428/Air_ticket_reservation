@@ -13,34 +13,44 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class JpaTicketRepository implements MyTicketRepository,BuyTicketRepository,TicketRepository {
+public class JpaTicketRepository implements MyTicketRepository,BuyTicketRepository,TicketRepository{
     private final EntityManager em;
 
     public JpaTicketRepository(EntityManager em) { this.em = em;}
 
-
     @Override
-    public void save(ReservationEntity ticketEntity) {
+    public List<JourneyEntity> findCond(Long d_code, Long a_code, String d_time, String a_time) {
+        System.out.println("findCond : " + d_code + a_code + d_time + a_time);
 
+        String jpql = "select j from journey j where j.d_airport_id LIKE concat('%', :inputD_code, '%') and j.a_airport_id LIKE concat('%', :inputA_code, '%') and j.d_time LIKE concat('%', :inputD_time, '%') and j.a_time LIKE concat('%', :inputA_time, '%')";
+        TypedQuery<JourneyEntity> query = em.createQuery(jpql, JourneyEntity.class);
+
+        query.setParameter("inputD_code", d_code);
+        query.setParameter("inputA_code", a_code);
+        query.setParameter("inputD_time", d_time);
+        query.setParameter("inputA_time", a_time);
+        List<JourneyEntity> result = query.getResultList();
+
+        if(!result.isEmpty()) {
+            System.out.println("findCond - result : " + result.get(0).getA_airport_id());
+        }
+        return result;
     }
-
+    @Override
     public List<AirportEntity> findAll() {
-
-        List<AirportEntity> result = em.createQuery("select a from airport a", AirportEntity.class).getResultList();
-        System.out.println("print result");
+        List<AirportEntity> result = em.createQuery("select a from airport a", AirportEntity.class)          //JPQL 이라는 쿼리 사용
+                .getResultList();
         return result;
     }
 
     @Override
-    public List<ReservationEntity> findCond(ReservationEntity ticketEntity) {
-        return null;
+    public Optional<AirportEntity> findById(Long id) {
+        AirportEntity ticket = em.find(AirportEntity.class, id);
+        return Optional.ofNullable(ticket);
     }
+
 
     @Override
-    public Optional<ReservationEntity> findById(Long ticketId) {
-        return Optional.empty();
-    }
-
     public List<ReservationEntity> findAllReservation() {
         List<ReservationEntity> result = em.createQuery("select r from reservation r", ReservationEntity.class)          //JPQL 이라는 쿼리 사용
                 .getResultList();
@@ -108,5 +118,10 @@ public class JpaTicketRepository implements MyTicketRepository,BuyTicketReposito
         list.removeAll(result);
         return list;
     }
+
+
+
+
+    //
 
 }

@@ -25,6 +25,8 @@ public class MyTicketService {
             ticket.setReservation_id(ticketEntity.getReservation_id());
             ticket.setReservation_name(ticketEntity.getReservation_name());
             ticket.setPassport(ticketEntity.getPassport());
+            ticket.setSeat(ticketEntity.getSeat());
+            ticket.setJourney_id(ticketEntity.getJourney_id());
             list.add(ticket);
         }
         return list;
@@ -38,6 +40,7 @@ public class MyTicketService {
         ticketEntity.setReservation_id(ticketForm.getReservation_id());
         ticketEntity.setReservation_name(ticketForm.getReservation_name());
         ticketEntity.setPassport(ticketForm.getPassport());
+        ticketEntity.setSeat(ticketEntity.getSeat());
 
         List<Reservation.Simple> list = new ArrayList<>();
         for(ReservationEntity ticketEntity2 : myTicketRepository.findCondReservation(ticketEntity)) {
@@ -46,6 +49,7 @@ public class MyTicketService {
             ticket2.setReservation_id(ticketEntity2.getReservation_id());
             ticket2.setReservation_name(ticketEntity2.getReservation_name());
             ticket2.setPassport(ticketEntity2.getPassport());
+            ticket2.setSeat(ticketEntity2.getSeat());
             list.add(ticket2);
         }
         return list;
@@ -65,4 +69,5 @@ public class MyTicketService {
 
         myTicketRepository.delete(ticketEntity);
     }
+
 }
