@@ -1,11 +1,14 @@
 package com.example.ticketmybatis.repository;
 
+import com.example.ticketmybatis.domain.Journey;
 import com.example.ticketmybatis.entity.AirportEntity;
 import com.example.ticketmybatis.entity.JourneyEntity;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,10 +87,26 @@ public class JpaTicketRepository implements MyTicketRepository,BuyTicketReposito
         return result;
     }
 
+    // 자석 정보 가져오기
     @Override
-    public void delete(ReservationEntity ticket) {
-        System.out.println("*** Repository.delete 시작 ***");
-        em.remove(ticket);
+    public List<String> findBuyTicketById(Long journey_id) {
+        String[] seat={
+            "A1","A2","A3","A4","A5","A6","A7","A8","A9","A10",
+            "B1","B2","B3","B4","B5","B6","B7","B8","B9","B10",
+            "C1","C2","C3","C4","C5","C6","C7","C8","C9","C10",
+            "D1","D2","D3","D4","D5","D6","D7","D8","D9","D10",
+            "E1","E2","E3","E4","E5","E6","E7","E8","E9","E10",
+            "F1","F2","F3","F4","F5","F6","F7","F8","F9","F10",
+            "G1","G2","G3","G4","G5","G6","G7","G8","G9","G10",
+            "H1","H2","H3","H4","H5","H6","H7","H8","H9","H10",
+            "I1","I2","I3","I4","I5","I6","I7","I8","I9","I10"
+        };
+        String jpql = String.format("select seat from reservation r where r.journey_id = %d", journey_id);
+        TypedQuery<String> query = em.createQuery(jpql, String.class);
+        List<String> result = query.getResultList();
+        List<String> list = new ArrayList<>(Arrays.asList(seat));
+        list.removeAll(result);
+        return list;
     }
 
 }

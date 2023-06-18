@@ -22,17 +22,14 @@ public class JourneyEntity {
     @Column
     private Date a_time;
 
+    @Column
+    private Long price;
+
     @ManyToOne
-    @JoinColumn(name = "airport", insertable=false, updatable=false)
+    @JoinColumn(name = "d_airport_id", referencedColumnName = "airport_id",insertable=false, updatable=false)
     private AirportEntity d_airport_id;
 
     @ManyToOne
-    @JoinColumn(name = "airport", insertable=false, updatable=false)
+    @JoinColumn(name = "a_airport_id", referencedColumnName = "airport_id",insertable=false, updatable=false)
     private AirportEntity a_airport_id;
-
-    @Column
-    private String d_airport;
-
-    @Column
-    private String a_airport;
 }

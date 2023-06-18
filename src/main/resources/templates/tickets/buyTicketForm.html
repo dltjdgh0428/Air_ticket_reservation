@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
-<div class="container">
-    <form action="/tickets/search" method="post">
+  </head>
+  <body>
+    <div class="container">
+      <form action="/tickets/buy" method="post">
         <div class="form-group">
-            <h1><a href="/">항공권 구매</a> </h1>
-            <p><label for="seat">좌석번호</label>
-                <select id="seat" name="seat">
-                    <option value="초기화면">좌석을 선택해주세요</option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A3</option>
-                    <option value="A3">A3</option>
-                    <option value="A4">A4</option>
-                    <option value="A5">A5</option>
-                    <option value="A6">A6</option>
-                </select>
-            </p>
-            <p><label for="reservation">예약자정보</label>
-                <input type="text" id="reservation" name="reservation" placeholder="이름">
-                <input type="text" id="passportNumber" name="passportNumber" placeholder="여권번호">
-            </p>
+          <h1><a href="/">항공권 구매</a></h1>
+          <p>
+            <label for="seat">좌석번호</label>
+            <select id="seat" name="seat">
+              <option value="초기화면">좌석을 선택해주세요</option>
+              <option
+                th:each="seat : ${seats}"
+                th:value="${seat}"
+                th:text="${seat}"
+              >
+                FAST
+              </option>
+            </select>
+          </p>
+          <p>
+            <label for="reservation_name">예약자정보</label>
+            <input
+              type="text"
+              id="reservation_name"
+              name="reservation_name"
+              placeholder="이름"
+            />
+            <input
+              type="text"
+              id="passport"
+              name="passport"
+              placeholder="여권번호"
+            />
+          </p>
+          <input
+            style="display: none"
+            type="text"
+            id="journey_id"
+            name="journey_id"
+            th:value="${journey_id}"
+            readonly
+          />
         </div>
         <button type="submit">구매하기</button>
-    </form>
-</div> <!-- /container -->
-</body>
+      </form>
+    </div>
+    <!-- /container -->
+  </body>
 </html>

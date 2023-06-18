@@ -1,6 +1,7 @@
 package com.example.ticketmybatis.controller;
 import com.example.ticketmybatis.domain.Airport;
 import com.example.ticketmybatis.domain.Journey;
+import com.example.ticketmybatis.domain.Reservation;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.service.BuyTicketService;
 import com.example.ticketmybatis.service.MyTicketService;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -56,16 +58,22 @@ public class TicketController {
         return "home";
     }
 
-    @GetMapping(value = "/tickets/buy")        //멤버 등록화면 데이터 인수
-    public String searchForm() {
+    @GetMapping(value = "/tickets/buy/{journeyId}")
+    public String searchForm(@PathVariable Long journeyId,Model model) {
+        System.out.println("ticket buy form--------- ");
+        List<String> seat = buyTicketService.findBuyTicketById(journeyId);
+        model.addAttribute("seats",seat);
+        model.addAttribute("journey_id", journeyId.toString());
         return "tickets/buyTicketForm";
-
     }
 
-    @PostMapping(value = "/tickets/search")                                //ticketSearchform에서 받은 데이터 반영
-    public String search(Journey.Simple form, Model model) {
-        List<Journey.Simple> tickets = buyTicketService.findCondBuyTickets(form);
-        model.addAttribute("tickets", tickets);
+    @PostMapping(value = "/tickets/buy")                                //ticketSearchform에서 받은 데이터 반영
+    public String search(Reservation.Simple form, Model model) {
+        System.out.println("ticket buy --------- ");
+        System.out.println(form.getPassport());
+        System.out.println(form.getSeat());
+        System.out.println(form.getJourney_id());
+        //model.addAttribute("tickets", tickets);
         return "tickets/ticketList";
     }
 

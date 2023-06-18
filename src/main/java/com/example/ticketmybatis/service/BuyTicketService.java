@@ -1,7 +1,9 @@
 package com.example.ticketmybatis.service;
 
 import com.example.ticketmybatis.domain.Journey;
+import com.example.ticketmybatis.domain.Reservation;
 import com.example.ticketmybatis.entity.JourneyEntity;
+import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.repository.BuyTicketRepository;
 import jakarta.transaction.Transactional;
 
@@ -36,7 +38,7 @@ public class BuyTicketService {
     }
 
     /**
-     * 조건에 맞는 도서 목록 조회
+     * 조건에 맞는 티켓 조회
      */
     public List<Journey.Simple> findCondBuyTickets(Journey.Simple ticketForm) {
         JourneyEntity ticketEntity = new JourneyEntity();
@@ -59,7 +61,17 @@ public class BuyTicketService {
         }
         return list;
     }
-
+    public List<String> findBuyTicketById(Long ticketId) {
+        return buyTicketRepository.findBuyTicketById(ticketId);
+    }
+    // public Long addReservation(Reservation.Simple form) {
+    //     ReservationEntity reservationEntity = new ReservationEntity();
+    //     reservationEntity.setReservation_id(form.getReservation_id());
+    //     reservationEntity.setJourney_id(form.getJourney_id());
+    //     reservationEntity.setSeat(form.getSeat());
+    //     reservationEntity.setPassport(form.getPassport());
+    //     return 
+    // }
 
     public JourneyEntity getTicketById(Long ticketId) {
         return buyTicketRepository.findByIdJourney(ticketId).orElseThrow(
