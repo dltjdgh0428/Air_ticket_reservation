@@ -1,5 +1,6 @@
 package com.example.ticketmybatis.repository;
 
+import com.example.ticketmybatis.entity.AirportEntity;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -19,9 +20,11 @@ public class JpaTicketRepository implements TicketRepository {
     }
 
     @Override
-    public List<ReservationEntity> findAll() {
-        List<ReservationEntity> result = em.createQuery("select * from reservation", ReservationEntity.class)          //JPQL 이라는 쿼리 사용
-                .getResultList();
+    public List<AirportEntity> findAll() {
+
+        List<AirportEntity> result = em.createQuery("select * from airport", AirportEntity.class).getResultList();
+        System.out.println("pring result");
+        System.out.println(result.get(0));
         return result;
     }
 

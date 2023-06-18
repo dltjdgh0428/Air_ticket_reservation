@@ -3,50 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ticketmybatis.repository.MybatisTicketRepository">
-    <select id="findAll" resultType="TicketEntity">
+    <select id="findAll" resultType="AirportEntity">
         select
             *
         from
-            reservation
+            airport
     </select>
 
-    <select id="findCond" parameterType="TicketEntity" resultType="TicketEntity">
-        select
-        *
-        from
-        reservation
-<!--        ticket-->
-<!--        where name like concat('%',#{name}, '%')-->
-<!--        and publisher like concat('%',#{publisher}, '%');-->
-    </select>
+<!--    <select id="findCond" parameterType="TicketEntity" resultType="TicketEntity">-->
+<!--        select-->
+<!--        *-->
+<!--        from-->
+<!--        reservation-->
+<!--&lt;!&ndash;        ticket&ndash;&gt;-->
+<!--&lt;!&ndash;        where name like concat('%',#{name}, '%')&ndash;&gt;-->
+<!--&lt;!&ndash;        and publisher like concat('%',#{publisher}, '%');&ndash;&gt;-->
+<!--    </select>-->
 
-    <insert id="save" parameterType="TicketEntity" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into reservation
-        (reservation_id, reservation_name, passport)
-        values
-        (#{reservation_id}, #{reservation_name}, #{passport})
-    </insert>
+<!--    <insert id="save" parameterType="TicketEntity" useGeneratedKeys="true" keyColumn="id" keyProperty="id">-->
+<!--        insert into reservation-->
+<!--        (reservation_id, reservation_name, passport)-->
+<!--        values-->
+<!--        (#{reservation_id}, #{reservation_name}, #{passport})-->
+<!--    </insert>-->
 
-    <select id="findById" parameterType="Long" resultType="TicketEntity">
-        select
-        *
-        from
-        reservation
-        where
-        reservation_id = #{reservation_id}
-    </select>
+<!--    <select id="findById" parameterType="Long" resultType="TicketEntity">-->
+<!--        select-->
+<!--        *-->
+<!--        from-->
+<!--        reservation-->
+<!--        where-->
+<!--        reservation_id = #{reservation_id}-->
+<!--    </select>-->
 
-    <update id="update" parameterType="TicketEntity">
-        update reservation set
-        reservation_id = #{reservation_id}, reservation_name = #{reservation_name}, passport = #{passport}
-        where
-        reservation_id = #{reservation_id}
-    </update>
+<!--    <update id="update" parameterType="TicketEntity">-->
+<!--        update reservation set-->
+<!--        reservation_id = #{reservation_id}, reservation_name = #{reservation_name}, passport = #{passport}-->
+<!--        where-->
+<!--        reservation_id = #{reservation_id}-->
+<!--    </update>-->
 
-    <delete id="delete" parameterType="TicketEntity">
-        delete from reservation
-        where
-        reservation_id = #{reservation_id}
-    </delete>
+<!--    <delete id="delete" parameterType="TicketEntity">-->
+<!--        delete from reservation-->
+<!--        where-->
+<!--        reservation_id = #{reservation_id}-->
+<!--    </delete>-->
 
 </mapper>

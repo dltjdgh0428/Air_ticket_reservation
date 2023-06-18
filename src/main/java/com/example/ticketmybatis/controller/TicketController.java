@@ -1,5 +1,7 @@
 package com.example.ticketmybatis.controller;
 
+import com.example.ticketmybatis.domain.Airport;
+import com.example.ticketmybatis.domain.Journey;
 import com.example.ticketmybatis.domain.Reservation;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.service.TicketService;
@@ -23,16 +25,16 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "home";
+//    }
 
 
-    @RequestMapping(value = "/") //원래는 getMapping에 경로는 tickets
+    @GetMapping(value = "/") //원래는 getMapping에 경로는 tickets
     public String list(Model model) {
         System.out.println("*** tickets mapping *** ");
-        List<Reservation.Simple> tickets = ticketService.findTickets();
+        List<Airport.Simple> tickets = ticketService.findTickets();
         model.addAttribute("tickets", tickets);
         return "home";
     }

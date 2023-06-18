@@ -1,6 +1,10 @@
 package com.example.ticketmybatis.service;
 
+import com.example.ticketmybatis.domain.Airport;
+import com.example.ticketmybatis.domain.Journey;
 import com.example.ticketmybatis.domain.Reservation;
+import com.example.ticketmybatis.entity.AirportEntity;
+import com.example.ticketmybatis.entity.JourneyEntity;
 import com.example.ticketmybatis.entity.ReservationEntity;
 import com.example.ticketmybatis.repository.TicketRepository;
 import jakarta.transaction.Transactional;
@@ -29,15 +33,18 @@ public class TicketService {
 
 
     /**
-     * 전체 도서 목록 조회
+     * 가능한 티켓 조회 (전체 티켓)
      */
-    public List<Reservation.Simple> findTickets() {
-        List<Reservation.Simple> list = new ArrayList<>();
-        for (ReservationEntity ticketEntity : ticketRepository.findAll()) {
-            Reservation.Simple ticket = new Reservation.Simple();
-            ticket.setReservation_id(ticketEntity.getReservation_id());
-            ticket.setReservation_name(ticketEntity.getReservation_name());
-            ticket.setPassport(ticketEntity.getPassport());
+    public List<Airport.Simple> findTickets() {
+        List<Airport.Simple> list = new ArrayList<>();
+
+        for (AirportEntity ticketEntity : ticketRepository.findAll()) {
+            System.out.println("*** ticket service ***");
+            Airport.Simple ticket = new Airport.Simple();
+            ticket.setAirport_id(ticketEntity.getAirport_id());
+            ticket.setCode(ticketEntity.getCode());
+            ticket.setCity(ticketEntity.getCity());
+            ticket.setCountry(ticketEntity.getCountry());
             list.add(ticket);
         }
         return list;
