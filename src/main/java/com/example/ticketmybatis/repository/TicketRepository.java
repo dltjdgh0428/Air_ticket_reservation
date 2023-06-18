@@ -1,18 +1,13 @@
 package com.example.ticketmybatis.repository;
 
 import com.example.ticketmybatis.entity.AirportEntity;
-import com.example.ticketmybatis.entity.ReservationEntity;
+import com.example.ticketmybatis.entity.JourneyEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface TicketRepository {
-    void save(ReservationEntity ticketEntity);
-
     List<AirportEntity> findAll();
-
-    List<ReservationEntity> findCond(ReservationEntity ticketEntity);
-    Optional<ReservationEntity> findById(Long ticketId);
-
-    void delete(ReservationEntity ticketEntity);
+    Optional<AirportEntity> findById(Long ticketId);
+    List<JourneyEntity> findCond(Long d_city, Long a_city, String d_time, String a_time);
 }

@@ -13,11 +13,9 @@ public class Journey {
         private Long journey_id;
         private Date d_time;
         private Date a_time;
+        private Long price;
         private AirportEntity d_airport_id;
         private AirportEntity a_airport_id;
-
-        private String d_airport;
-        private String a_airport;
 
     }
 

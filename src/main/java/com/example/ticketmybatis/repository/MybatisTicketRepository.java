@@ -9,15 +9,5 @@ import java.util.Optional;
 @Mapper
 public interface MybatisTicketRepository {
     void save(AirportEntity var1);
-//
-//    List<TicketEntity> findAll();
-//
-//    List<TicketEntity> findCond(TicketEntity var1);
-//
-//    Optional<TicketEntity> findById(Long var1);
-//
-//    void update(TicketEntity var1);
-//
-//    void delete(BookEntity var1);
 
 }

@@ -18,6 +18,7 @@ public class BuyTicketService {
         this.buyTicketRepository = buyTicketRepository;
     }
 
+
     /**
      * 내 티켓 조회
      */
@@ -30,6 +31,7 @@ public class BuyTicketService {
             ticket.setA_time(ticketEntity.getA_time());
             ticket.setD_airport_id(ticketEntity.getD_airport_id());
             ticket.setA_airport_id(ticketEntity.getA_airport_id());
+            ticket.setPrice(ticketEntity.getPrice());
             list.add(ticket);
         }
         return list;
@@ -56,6 +58,7 @@ public class BuyTicketService {
             ticket2.setD_airport_id(ticketForm.getD_airport_id());
             ticket2.setA_airport_id(ticketForm.getA_airport_id());
             list.add(ticket2);
+
         }
         return list;
     }

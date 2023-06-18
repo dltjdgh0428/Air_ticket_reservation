@@ -5,69 +5,55 @@
   <title>항공 예매 시스템</title>
 </head>
 <body>
-  <h1><a href="/">항공 예매 시스템🎫 </a> </h1>
+<h1><a href="/">항공 예매 시스템🎫 </a> </h1>
+<!--  <form action="/books/search" method="post">-->
 
-  <form action="/books/search" method="post">
-    <div class="form-group">
-      <label for="name">🛫출발지</label>
-      <select class="form-select">
-        <option value="">선택하세요</option>
-        <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
+<form action="/tickets" method="post">
+  <div class="form-group">
+    <label for="name">🛫출발지</label>
+    <select class="form-select" id="d_city" name = "d_city">
+      <option selected>선택하세요</option>
+
+      <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
               th:text="${ticket.city}">FAST</option>
-      </select>
-      <label for="name">🛬도착지</label>
-      <select>
-        <option value="">선택하세요</option>
-        <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
-                th:text="${ticket.city}">FAST</option>
-      </select>
-      <label for="name">가는 날짜</label>
-      <select>
-        <option value="">선택하세요</option>
-      </select>
-      <label for="name">오는 날짜</label>
-      <select>
-        <option value="">선택하세요</option>
-      </select>
-    </div>
-  </form>
-  <form action="/tickets/buy" method="post">
-    <div class="form-group">
-      <label for="name">🛫출발지</label>
-      <select class="form-select">
-        <option selected>선택하세요</option>
+    </select>
+    <label for="name">🛬도착지</label>
+    <select  id="a_city" name="a_city">
+      <option selected>선택하세요</option>
+      <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
+              th:text="${ticket.city}">FAST</option>
+    </select>
+    <label for="d_time">📆가는 날짜
+      <input type="date"
+             id="d_time"
+             name="d_time"
+             max="2077-06-20"
+             min="2023-06-01"
+             value=Date.now()>
+    </label>
+    <label for="a_time">📆오는 날짜
+      <input type="date"
+             id="a_time"
+             name="a_time"
+             max="2077-06-20"
+             min="2023-06-01"
+             value=Date.now()>
+    </label>
 
-        <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
-                th:text="${ticket.city}">FAST</option>
-      </select>
-      <label for="name">🛬도착지</label>
-      <select>
-        <option selected>선택하세요</option>
-        <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
-                th:text="${ticket.city}">FAST</option>
-      </select>
-      <label for="name">가는 날짜</label>
-      <select>
-        <option selected>선택하세요</option>
-      </select>
-      <label for="name">오는 날짜</label>
-      <select>
-        <option selected>선택하세요</option>
-      </select>
-      <button action="submit">검색</button>
-    </div>
-  </form>
-  <div><p></p></div>
-  <!--  포스트요청이 불가능하기에 form박스 밖으로뺐음-->
-  <button onclick="location.href='/tickets'">전체 검색</button>
+    <button action="submit">검색</button>
+  </div>
+</form>
+<div><p></p></div>
+<!--  포스트요청이 불가능하기에 form박스 밖으로뺐음-->
+<!--  <button onclick="location.href='/tickets'">전체 검색</button>-->
 
-  <form action="/tickets/search" method="post">
-    <div class="form-group">
-      <label for="name">여권번호</label>
-      <input type="text" id="name" name="name" placeholder="여권번호를 입력하세요">
-      <button type="submit">검색</button>
-    </div>
-  </form>
+<form action="/tickets/search" method="post">
+  <div class="form-group">
+    <label for="name">여권번호</label>
+    <input type="text" id="name" name="name" placeholder="여권번호를 입력하세요">
+    <button type="submit">검색</button>
+  </div>
+</form>
 
 </body>
 </html>

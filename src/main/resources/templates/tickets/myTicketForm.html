@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>내 티켓 정보</title>
+    <style>
+      .Ritem{
+      width: calc(33.33% - 40px);
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .tContainer{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      padding: 20px;
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div>
+    <h1><a href="/">항공권 검색결과</a> </h1>
+    <div class="tContainer">
+      <div class="Ritem" th:each="myTicket : ${myTickets}">
+          <p>예약 No: <span th:text="${myTicket.reservation_id}"></span></p>
+          <p>여권번호: <span th:text="${myTicket.passport}"></span></p>
+          <p>이름: <span th:text="${myTicket.reservation_name}"></span></p>
+          <p>출발시간: <span th:text="${myTicket.journey_id.d_time}"></span></p>
+          <p>출발공항: <span th:text="${myTicket.journey_id.d_airport_id.country}"></span></p>
+          <p>도착시간: <span th:text="${myTicket.journey_id.a_time}"></span></p>
+          <p>도착공항: <span th:text="${myTicket.journey_id.a_airport_id.country}"></span></p>
+          <p>좌석정보: <span th:text="${myTicket.seat}"></span></p>
+          <button onclick="location.href='/'">확인</button>
+          <div></div>
+          <a th:href="@{/tickets/{id}/delete(id = ${myTicket.reservation_id})}">
+              <button>예약취소하기</button>
+          </a>
+      </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
