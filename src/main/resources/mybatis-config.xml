@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="TicketEntity" type="com.example.ticketmybatis.entity.TicketEntity"/>
+        <typeAlias alias="AirportEntity" type="com.example.ticketmybatis.entity.AirportEntity"/>
+        <typeAlias alias="JourneyEntity" type="com.example.ticketmybatis.entity.JourneyEntity"/>
+        <typeAlias alias="ReservationEntity" type="com.example.ticketmybatis.entity.ReservationEntity"/>
     </typeAliases>
 </configuration>

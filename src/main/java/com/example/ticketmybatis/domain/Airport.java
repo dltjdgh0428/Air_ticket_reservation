@@ -10,7 +10,6 @@ public class Airport {
         private Long airport_id;
         private String country;
         private String city;
-
         private String code;
     }
 }

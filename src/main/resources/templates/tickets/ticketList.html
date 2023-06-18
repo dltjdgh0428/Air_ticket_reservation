@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .tForm {
-            border: 1px solid #ddd;
+        #box1{
+            padding-left:10px;
+            border: solid 2px #76d7ea;
+            width: 60%;
+            height: 120px;
+            float: left;
+            margin-bottom:10px;
+            border-radius: 10px 0px 0px 10px;
+            display:flex;
+        }
+        #box2{
+            padding-left:10px;
+            margin-bottom:10px;
+            border: solid 2px #76d7ea;
+            width: 30%;
+            height: 120px;
+            float: left;
+            border-radius: 0px 10px 10px 0px;
+            text-align:center;
+        }
+        .zzz{
+            display: flex;
+            text-align:center;
+            align-items: center;
         }
     </style>
 </head>
@@ -14,10 +36,23 @@
     <div>
         <h1><a href="/">항공권 검색결과</a> </h1>
         <div class="tContainer">
-            <div class="tForm" th:each="ticket : ${tickets}">
-                <p th:text="출발시간 : ${ticket.d_time}">출발시간</p>
-                <p th:text="도착시간 : ${ticket.a_time}">도착시간</p>
-                <p th:text="항공사/기종 : ${}">항공사/기종</p>
+            <div th:each="ticket : ${tickets}">
+                <div id="box1">
+                    <div class="depart">
+                        <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
+                        <p>출발공항: <span th:text="${ticket.d_airport}"></span></p>
+                        <p>항공사/기종</p>
+                    </div>
+                    <div class="zzz">-----></div>
+                    <div class="arrive">
+                        <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
+                        <p>도착공항: <span th:text="${ticket.a_airport}"></span></p>
+                    </div>
+                </div>
+                <div id="box2">
+                    <p>₩:329,100</p>
+                    <button onclick="location.href='/tickets/buy'">구매하기</button>
+                </div>
             </div>
         </div>
     </div>

@@ -29,4 +29,10 @@ public class JourneyEntity {
     @ManyToOne
     @JoinColumn(name = "airport", insertable=false, updatable=false)
     private AirportEntity a_airport_id;
+
+    @Column
+    private String d_airport;
+
+    @Column
+    private String a_airport;
 }

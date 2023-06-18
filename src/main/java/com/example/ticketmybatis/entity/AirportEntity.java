@@ -6,8 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "airport")
+@Entity(name = "airport")
 public class AirportEntity{
 
     @Id

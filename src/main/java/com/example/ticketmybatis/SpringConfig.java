@@ -1,8 +1,12 @@
 package com.example.ticketmybatis;
 
 
-import com.example.ticketmybatis.repository.TicketRepository;
+import com.example.ticketmybatis.repository.BuyTicketRepository;
+import com.example.ticketmybatis.repository.MyTicketRepository;
 import com.example.ticketmybatis.repository.JpaTicketRepository;
+import com.example.ticketmybatis.repository.TicketRepository;
+import com.example.ticketmybatis.service.BuyTicketService;
+import com.example.ticketmybatis.service.MyTicketService;
 import com.example.ticketmybatis.service.TicketService;
 import jakarta.persistence.EntityManager;
 import org.mybatis.spring.annotation.MapperScan;
@@ -17,30 +21,27 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.example.ticketmybatis.repository")
 @EnableJpaRepositories("com.example.ticketmybatis.repository")
 public class SpringConfig {
-//    private final MybatisTicketRepository ticketRepository;
-//    private final DataJpaTicketRepository ticketRepository; // DataJPA용
     private EntityManager em; // JPA용
-
-
-//    public SpringConfig(MybatisTicketRepository ticketRepository) {
-//        this.ticketRepository = ticketRepository;
-//    }
-//    public SpringConfig(DataJpaTicketRepository ticketRepository){
-//        this.ticketRepository = ticketRepository;
-//    }
     @Autowired
     public SpringConfig(EntityManager em){
         this.em = em;
     }
 
     @Bean
-    public TicketService ticketService(){
-//        return new TicketService(ticketRepository); // myBatis와 dataJPA용
-        return new TicketService(ticketRepository());
+    public MyTicketService myTicketService(){
+        return new MyTicketService(ticketRepository());
     }
-
     @Bean
-    public TicketRepository ticketRepository() {
+    public BuyTicketService buyTicketService(){
+        return new BuyTicketService((BuyTicketRepository) ticketRepository());
+    }
+    @Bean
+    public TicketService TicketService(){
+        return new TicketService((TicketRepository) ticketRepository());
+    }
+    @Bean
+    public MyTicketRepository ticketRepository() {
         return new JpaTicketRepository(em);
     }
+
 }

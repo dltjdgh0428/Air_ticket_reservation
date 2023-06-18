@@ -14,17 +14,8 @@ import java.util.List;
 
 @Transactional
 public class TicketService {
+    private static TicketRepository ticketRepository;//JPA용
 
-//    private final MybatisTicketRepository ticketRepository;
-//    private final DataJpaTicketRepository ticketRepository; // DataJPA용
-    private final TicketRepository ticketRepository;//JPA용
-
-//    public TicketService(MybatisTicketRepository ticketRepository) {
-//        this.ticketRepository = ticketRepository; 
-//    }
-//    public TicketService(DataJpaTicketRepository ticketRepository){
-//        this.ticketRepository = ticketRepository;
-//    }
     public TicketService(TicketRepository ticketRepository){
         this.ticketRepository = ticketRepository;
     }
@@ -35,7 +26,7 @@ public class TicketService {
     /**
      * 가능한 티켓 조회 (전체 티켓)
      */
-    public List<Airport.Simple> findTickets() {
+    public static List<Airport.Simple> findTickets() {
         List<Airport.Simple> list = new ArrayList<>();
 
         for (AirportEntity ticketEntity : ticketRepository.findAll()) {
