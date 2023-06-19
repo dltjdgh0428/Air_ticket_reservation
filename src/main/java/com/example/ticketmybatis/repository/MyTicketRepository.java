@@ -14,4 +14,5 @@ public interface MyTicketRepository {
     Optional<ReservationEntity> findByIdReservation(Long ticketId);
 
     void delete(ReservationEntity reservationEntity);
+    List<ReservationEntity> findMyReservation(String passport);
 }

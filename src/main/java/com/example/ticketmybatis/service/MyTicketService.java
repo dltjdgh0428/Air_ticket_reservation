@@ -58,6 +58,7 @@ public class MyTicketService {
     }
 
 
+
     public ReservationEntity getTicketById(Long ticketId) {
         return myTicketRepository.findByIdReservation(ticketId).orElseThrow(
                 IllegalArgumentException::new
@@ -71,5 +72,23 @@ public class MyTicketService {
 
         myTicketRepository.delete(ticketEntity);
     }
-
+    //--다빈
+    /**
+     * 여권번호로 내 티켓 조회
+     */
+    public List<Reservation.Simple> findMyTickets(String passport) {
+        List<Reservation.Simple> list = new ArrayList<>();
+        for (ReservationEntity ticketEntity : myTicketRepository.findMyReservation(passport) ) {
+            Reservation.Simple ticket = new Reservation.Simple();
+            ticket.setReservation_id(ticketEntity.getReservation_id());
+            ticket.setPassport(ticketEntity.getPassport());
+            ticket.setReservation_name(ticketEntity.getReservation_name());
+            ticket.setPassport(ticketEntity.getPassport());
+            ticket.setJourney_id(ticketEntity.getJourney_id());
+            ticket.setSeat(ticketEntity.getSeat());
+            list.add(ticket);
+        }
+        return list;
+    }
+    //
 }

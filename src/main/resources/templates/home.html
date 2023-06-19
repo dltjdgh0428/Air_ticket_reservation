@@ -6,22 +6,21 @@
 </head>
 <body>
 <h1><a href="/">항공 예매 시스템🎫 </a> </h1>
-<!--  <form action="/books/search" method="post">-->
 
 <form action="/tickets" method="post">
   <div class="form-group">
-    <label for="name">🛫출발지</label>
+    <label for="d_city" >🛫출발지</label>
     <select class="form-select" id="d_city" name = "d_city">
-      <option selected>선택하세요</option>
+      <option selected value=0>Everywhere</option>
 
       <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
-              th:text="${ticket.city}">FAST</option>
+              th:text="${ticket.city}">none</option>
     </select>
-    <label for="name">🛬도착지</label>
+    <label for="a_city">🛬도착지</label>
     <select  id="a_city" name="a_city">
-      <option selected>선택하세요</option>
+      <option selected value=0>Everywhere</option>
       <option th:each="ticket : ${tickets}" th:value="${ticket.airport_id}"
-              th:text="${ticket.city}">FAST</option>
+              th:text="${ticket.city}">none</option>
     </select>
     <label for="d_time">📆가는 날짜
       <input type="date"
@@ -49,11 +48,12 @@
 
 <form action="/tickets/search" method="post">
   <div class="form-group">
-    <label for="name">여권번호</label>
-    <input type="text" id="name" name="name" placeholder="여권번호를 입력하세요">
+    <label for="passport">여권번호</label>
+    <input type="text" id="passport" name="passport" placeholder="여권번호를 입력하세요">
     <button type="submit">검색</button>
   </div>
 </form>
+
 
 </body>
 </html>

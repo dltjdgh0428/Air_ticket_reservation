@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.LinkedList;
@@ -71,17 +70,20 @@ public class TicketController {
         List<String> seat = buyTicketService.findBuyTicketById(journeyId);
         model.addAttribute("seats",seat);
         model.addAttribute("journey_id", journeyId);
+        //여기추가
+        Journey.Simple ticket = buyTicketService.buyTicketTarget(journeyId);
+        model.addAttribute("tickets", ticket);
+        //
         return "tickets/buyTicketForm";
     }
 
     @PostMapping(value = "/tickets/buy")                                //ticketSearchform에서 받은 데이터 반영
-    public String search(Reservation.Simple2 form, Model model) {
+    public String search2(Reservation.Simple2 form, Model model) {
         System.out.println("ticket buy --------- ");
         Reservation.Simple ticket = buyTicketService.buyTicket(form);
         model.addAttribute("myTickets", ticket);
         return "tickets/myTicketForm";
     }
-    
     @PostMapping(value = "/tickets")   //홈에서 선택한 데이터 반영
     public String search(@RequestParam("d_city") Long d_id, @RequestParam("a_city") Long a_id, @RequestParam("d_time") String d_time, @RequestParam("a_time") String a_time, Model model){
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<Ddd>>>>>>>>>>>>>>>>>>>>>>>");
@@ -118,6 +120,13 @@ public class TicketController {
         return "redirect:/tickets";
     }
 
+    @PostMapping(value = "/tickets/search")
+    public String findTicketWithPassport(@RequestParam(value = "passport") String passport, Model model) {
+        System.out.println("*** Controller - findTicketWithPassport *** ");
+        List<Reservation.Simple> myTickets = myTicketService.findMyTickets(passport);
+        model.addAttribute("myTickets", myTickets);
 
+        return "tickets/myTicketForm";
+    }
 
 }

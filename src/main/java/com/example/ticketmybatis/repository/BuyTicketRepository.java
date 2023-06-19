@@ -10,9 +10,9 @@ public interface BuyTicketRepository {
 
     List<JourneyEntity> findAllJourney();
 
-    List<JourneyEntity> findCondJourney(JourneyEntity journeyEntity);
+    JourneyEntity findCondJourney(Long journeyId);
     Optional<JourneyEntity> findByIdJourney(Long ticketId);
     List<String> findBuyTicketById(Long journey_id);
     JourneyEntity findByIdJourney2(Long ticketId);
-    void saveReservation(ReservationEntity reservation);
+    ReservationEntity saveReservation(ReservationEntity reservation);
 }

@@ -1,54 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>Title</title>
-  </head>
-  <body>
-    <div class="container">
-      <form action="/tickets/buy" method="post">
+</head>
+<body>
+<div class="container">
+    <form action="/tickets/buy" method="post">
         <div class="form-group">
-          <h1><a href="/">항공권 구매</a></h1>
-          <p>
-            <label for="seat">좌석번호</label>
-            <select id="seat" name="seat">
-              <option value="초기화면">좌석을 선택해주세요</option>
-              <option
-                th:each="seat : ${seats}"
-                th:value="${seat}"
-                th:text="${seat}"
-              >
-                FAST
-              </option>
-            </select>
-          </p>
-          <p>
-            <label for="reservation_name">예약자정보</label>
+            <h1><a href="/">항공권 구매</a></h1>
+            <p>
+            <div th:each="ticket : ${tickets}">
+                <div id="box1">
+                    <div class="depart">
+                        <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
+                        <p>
+                            출발공항:
+                            <span th:text="${ticket.d_airport_id.country}"></span>
+                            <span th:text="${ticket.d_airport_id.city}"></span>
+                            <span th:text="${ticket.d_airport_id.code}"></span>
+                        </p>
+                    </div>
+                    <div class="zzz">-----></div>
+                    <div class="arrive">
+                        <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
+                        <p>
+                            도착공항:
+                            <span th:text="${ticket.a_airport_id.country}"></span>
+                            <span th:text="${ticket.a_airport_id.city}"></span>
+                            <span th:text="${ticket.a_airport_id.code}"></span>
+                        </p>
+                    </div>
+                </div>
+                <div id="box2">
+                    <p>₩<span th:text="${ticket.price}"></span></p>
+
+                </div>
+            </div>
+            </p>
+            <p>
+                <label for="seat">좌석번호</label>
+                <select id="seat" name="seat">
+                    <option value="초기화면">좌석을 선택해주세요</option>
+                    <option
+                            th:each="seat : ${seats}"
+                            th:value="${seat}"
+                            th:text="${seat}"
+                    >
+                    </option>
+                </select>
+            </p>
+            <p>
+                <label for="reservation_name">예약자정보</label>
+                <input
+                        type="text"
+                        id="reservation_name"
+                        name="reservation_name"
+                        placeholder="이름"
+                />
+                <input
+                        type="text"
+                        id="passport"
+                        name="passport"
+                        placeholder="여권번호"
+                />
+            </p>
             <input
-              type="text"
-              id="reservation_name"
-              name="reservation_name"
-              placeholder="이름"
+                    style="display: none"
+                    type="text"
+                    id="journey_id"
+                    name="journey_id"
+                    th:value="${journey_id}"
+                    readonly
             />
-            <input
-              type="text"
-              id="passport"
-              name="passport"
-              placeholder="여권번호"
-            />
-          </p>
-          <input
-            style="display: none"
-            type="text"
-            id="journey_id"
-            name="journey_id"
-            th:value="${journey_id}"
-            readonly
-          />
         </div>
         <button type="submit">구매하기</button>
-      </form>
-    </div>
-    <!-- /container -->
-  </body>
+    </form>
+</div>
+<!-- /container -->
+</body>
 </html>

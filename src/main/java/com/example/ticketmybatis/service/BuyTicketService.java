@@ -39,31 +39,43 @@ public class BuyTicketService {
         return list;
     }
 
+    public Journey.Simple buyTicketTarget(Long journey_id){
+        Journey.Simple ticket = new Journey.Simple();
+        JourneyEntity ticketEntity = buyTicketRepository.findCondJourney(journey_id);
+        ticket.setJourney_id(ticketEntity.getJourney_id());
+        ticket.setD_time(ticketEntity.getD_time());
+        ticket.setA_time(ticketEntity.getA_time());
+        ticket.setD_airport_id(ticketEntity.getD_airport_id());
+        ticket.setA_airport_id(ticketEntity.getA_airport_id());
+        ticket.setPrice(ticketEntity.getPrice());
+        return ticket;
+
+    }
     /**
      * 조건에 맞는 티켓 조회
      */
-    public List<Journey.Simple> findCondBuyTickets(Journey.Simple ticketForm) {
-        JourneyEntity ticketEntity = new JourneyEntity();
-        ticketEntity.setJourney_id(ticketForm.getJourney_id());
-        ticketEntity.setD_time((Date) ticketForm.getD_time());
-        ticketEntity.setA_time((Date) ticketForm.getA_time());
-        ticketEntity.setD_airport_id(ticketForm.getD_airport_id());
-        ticketEntity.setA_airport_id(ticketForm.getD_airport_id());
-
-        List<Journey.Simple> list = new ArrayList<>();
-        for(JourneyEntity ticketEntity2 : buyTicketRepository.findCondJourney(ticketEntity)) {
-//        for(TicketEntity ticketEntity2 : ticketRepository.findCond(ticketForm.getName(), ticketForm.getPublisher())) {
-            Journey.Simple ticket2 = new Journey.Simple();
-            ticket2.setJourney_id(ticketEntity2.getJourney_id());
-            ticket2.setD_time(ticketEntity2.getD_time());
-            ticket2.setA_time(ticketEntity2.getA_time());
-            ticket2.setD_airport_id(ticketForm.getD_airport_id());
-            ticket2.setA_airport_id(ticketForm.getA_airport_id());
-            list.add(ticket2);
-
-        }
-        return list;
-    }
+//    public List<Journey.Simple> findCondBuyTickets(Journey.Simple ticketForm) {
+//        JourneyEntity ticketEntity = new JourneyEntity();
+//        ticketEntity.setJourney_id(ticketForm.getJourney_id());
+//        ticketEntity.setD_time((Date) ticketForm.getD_time());
+//        ticketEntity.setA_time((Date) ticketForm.getA_time());
+//        ticketEntity.setD_airport_id(ticketForm.getD_airport_id());
+//        ticketEntity.setA_airport_id(ticketForm.getD_airport_id());
+//
+//        List<Journey.Simple> list = new ArrayList<>();
+//        for(JourneyEntity ticketEntity2 : buyTicketRepository.findCondJourney(ticketEntity)) {
+////        for(TicketEntity ticketEntity2 : ticketRepository.findCond(ticketForm.getName(), ticketForm.getPublisher())) {
+//            Journey.Simple ticket2 = new Journey.Simple();
+//            ticket2.setJourney_id(ticketEntity2.getJourney_id());
+//            ticket2.setD_time(ticketEntity2.getD_time());
+//            ticket2.setA_time(ticketEntity2.getA_time());
+//            ticket2.setD_airport_id(ticketForm.getD_airport_id());
+//            ticket2.setA_airport_id(ticketForm.getA_airport_id());
+//            list.add(ticket2);
+//
+//        }
+//        return list;
+//    }
     public List<String> findBuyTicketById(Long ticketId) {
         return buyTicketRepository.findBuyTicketById(ticketId);
     }
@@ -81,10 +93,12 @@ public class BuyTicketService {
         ticketEntity.setPassport(ticket.getPassport());
         ticketEntity.setSeat(ticket.getSeat());
         ticketEntity.setReservation_name(ticket.getReservation_name());
-        buyTicketRepository.saveReservation(ticketEntity);
+        ticketEntity=buyTicketRepository.saveReservation(ticketEntity);
+        ticket.setReservation_id(ticketEntity.getReservation_id());
         return ticket;
 
     }
+
 
     public JourneyEntity getTicketById(Long ticketId) {
         return buyTicketRepository.findByIdJourney(ticketId).orElseThrow(

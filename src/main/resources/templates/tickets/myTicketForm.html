@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>내 티켓 정보</title>
     <style>
-      .Ritem{
+    .rItem{
       width: calc(33.33% - 40px);
       margin: 20px;
       padding: 10px;
@@ -25,7 +25,7 @@
   <div>
     <h1><a href="/">항공권 검색결과</a> </h1>
     <div class="tContainer">
-      <div class="Ritem" th:each="myTicket : ${myTickets}">
+      <div class="rItem" th:each="myTicket : ${myTickets}">
           <p>예약 No: <span th:text="${myTicket.reservation_id}"></span></p>
           <p>여권번호: <span th:text="${myTicket.passport}"></span></p>
           <p>이름: <span th:text="${myTicket.reservation_name}"></span></p>
