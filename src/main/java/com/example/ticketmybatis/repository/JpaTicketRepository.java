@@ -72,6 +72,15 @@ public class JpaTicketRepository implements MyTicketRepository,BuyTicketReposito
         JourneyEntity ticket = em.find(JourneyEntity.class, id);
         return Optional.ofNullable(ticket);
     }
+    @Override
+    public JourneyEntity findByIdJourney2(Long id) {
+        JourneyEntity ticket = em.find(JourneyEntity.class, id);
+        return ticket;
+    }
+    @Override
+    public void saveReservation(ReservationEntity reservation) {
+        em.persist(reservation);
+    }
     /**
      * 여기는 안건드려도 될거같음.
      * */
@@ -118,10 +127,4 @@ public class JpaTicketRepository implements MyTicketRepository,BuyTicketReposito
         list.removeAll(result);
         return list;
     }
-
-
-
-
-    //
-
 }

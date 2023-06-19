@@ -1,68 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
     <style>
-        #box1{
-            padding-left:10px;
-            border: solid 2px #76d7ea;
-            width: 60%;
-            height: 120px;
-            float: left;
-            margin-bottom:10px;
-            border-radius: 10px 0px 0px 10px;
-            display:flex;
-        }
-        #box2{
-            padding-left:10px;
-            margin-bottom:10px;
-            border: solid 2px #76d7ea;
-            width: 30%;
-            height: 120px;
-            float: left;
-            border-radius: 0px 10px 10px 0px;
-            text-align:center;
-        }
-        .zzz{
-            display: flex;
-            text-align:center;
-            align-items: center;
-        }
+      #box1 {
+        padding-left: 10px;
+        border: solid 2px #76d7ea;
+        width: 60%;
+        height: 120px;
+        float: left;
+        margin-bottom: 10px;
+        border-radius: 10px 0px 0px 10px;
+        display: flex;
+      }
+      #box2 {
+        padding-left: 10px;
+        margin-bottom: 10px;
+        border: solid 2px #76d7ea;
+        width: 30%;
+        height: 120px;
+        float: left;
+        border-radius: 0px 10px 10px 0px;
+        text-align: center;
+      }
+      .zzz {
+        display: flex;
+        text-align: center;
+        align-items: center;
+      }
     </style>
-</head>
-<body>
-<div class="container">
-    <div>
-        <h1><a href="/">항공권 검색결과</a> </h1>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1><a href="/">항공권 검색결과</a></h1>
         <div class="tContainer">
-            <div th:each="ticket : ${tickets}">
-                <div id="box1">
-                    <div class="depart">
-                        <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
-                        <p>출발공항:
-                            <span th:text="${ticket.d_airport_id.country}"></span>
-                            <span th:text="${ticket.d_airport_id.city}"></span>
-                            <span th:text="${ticket.d_airport_id.code}"></span>
-                        </p>
-                    </div>
-                    <div class="zzz">-----></div>
-                    <div class="arrive">
-                        <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
-                        <p>도착공항:
-                            <span th:text="${ticket.a_airport_id.country}"></span>
-                            <span th:text="${ticket.a_airport_id.city}"></span>
-                            <span th:text="${ticket.a_airport_id.code}"></span>
-                        </p>
-                    </div>
-                </div>
-                <div id="box2">
-                    <p>₩<span th:text="${ticket.price}"></span></p>
-                    <button onclick="location.href='/tickets/buy'">구매하기</button>
-                </div>
+          <div th:each="ticket : ${tickets}">
+            <div id="box1">
+              <div class="depart">
+                <p>출발시간: <span th:text="${ticket.d_time}"></span></p>
+                <p>
+                  출발공항:
+                  <span th:text="${ticket.d_airport_id.country}"></span>
+                  <span th:text="${ticket.d_airport_id.city}"></span>
+                  <span th:text="${ticket.d_airport_id.code}"></span>
+                </p>
+              </div>
+              <div class="zzz">-----></div>
+              <div class="arrive">
+                <p>도착시간: <span th:text="${ticket.a_time}"></span></p>
+                <p>
+                  도착공항:
+                  <span th:text="${ticket.a_airport_id.country}"></span>
+                  <span th:text="${ticket.a_airport_id.city}"></span>
+                  <span th:text="${ticket.a_airport_id.code}"></span>
+                </p>
+              </div>
             </div>
+            <div id="box2">
+              <p>₩<span th:text="${ticket.price}"></span></p>
+              <button
+                th:onclick="|location.href='/tickets/buy/' + ${ticket.journey_id}|"
+              >
+                구매하기
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div> <!-- /container -->
-</body>
+    <!-- /container -->
+  </body>
 </html>

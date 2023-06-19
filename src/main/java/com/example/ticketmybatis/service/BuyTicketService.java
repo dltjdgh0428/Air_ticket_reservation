@@ -67,14 +67,24 @@ public class BuyTicketService {
     public List<String> findBuyTicketById(Long ticketId) {
         return buyTicketRepository.findBuyTicketById(ticketId);
     }
-    // public Long addReservation(Reservation.Simple form) {
-    //     ReservationEntity reservationEntity = new ReservationEntity();
-    //     reservationEntity.setReservation_id(form.getReservation_id());
-    //     reservationEntity.setJourney_id(form.getJourney_id());
-    //     reservationEntity.setSeat(form.getSeat());
-    //     reservationEntity.setPassport(form.getPassport());
-    //     return 
-    // }
+
+    public Reservation.Simple buyTicket(Reservation.Simple2 ticketForm){
+        ReservationEntity ticketEntity = new ReservationEntity();
+        Reservation.Simple ticket = new Reservation.Simple();
+        ticket.setJourney_id(buyTicketRepository.findByIdJourney2(ticketForm.getJourney_id()));
+        ticket.setReservation_id(ticketForm.getReservation_id());
+        ticket.setPassport(ticketForm.getPassport());
+        ticket.setSeat(ticketForm.getSeat());
+        ticket.setReservation_name(ticketForm.getReservation_name());
+        ticketEntity.setJourney_id(ticket.getJourney_id());
+        ticketEntity.setReservation_id(ticket.getReservation_id());
+        ticketEntity.setPassport(ticket.getPassport());
+        ticketEntity.setSeat(ticket.getSeat());
+        ticketEntity.setReservation_name(ticket.getReservation_name());
+        buyTicketRepository.saveReservation(ticketEntity);
+        return ticket;
+
+    }
 
     public JourneyEntity getTicketById(Long ticketId) {
         return buyTicketRepository.findByIdJourney(ticketId).orElseThrow(

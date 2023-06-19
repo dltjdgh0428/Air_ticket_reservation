@@ -29,6 +29,16 @@ public class Reservation {
         private String reservation_name;
         private String passport;
         private String seat;
+        private JourneyEntity journey_id;
+        //private Long journey_id;
+    }
+    @Data
+    public static class Simple2{
+        private Long reservation_id;
+        private String reservation_name;
+        private String passport;
+        private String seat;
+        //private JourneyEntity journey_id;
         private Long journey_id;
     }
 

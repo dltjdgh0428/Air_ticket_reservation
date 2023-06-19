@@ -70,18 +70,16 @@ public class TicketController {
         System.out.println("ticket buy form--------- ");
         List<String> seat = buyTicketService.findBuyTicketById(journeyId);
         model.addAttribute("seats",seat);
-        model.addAttribute("journey_id", journeyId.toString());
+        model.addAttribute("journey_id", journeyId);
         return "tickets/buyTicketForm";
     }
 
     @PostMapping(value = "/tickets/buy")                                //ticketSearchform에서 받은 데이터 반영
-    public String search(Reservation.Simple form, Model model) {
+    public String search(Reservation.Simple2 form, Model model) {
         System.out.println("ticket buy --------- ");
-        System.out.println(form.getPassport());
-        System.out.println(form.getSeat());
-        System.out.println(form.getJourney_id());
-        //model.addAttribute("tickets", tickets);
-        return "tickets/buyTicketForm";
+        Reservation.Simple ticket = buyTicketService.buyTicket(form);
+        model.addAttribute("myTickets", ticket);
+        return "tickets/myTicketForm";
     }
     
     @PostMapping(value = "/tickets")   //홈에서 선택한 데이터 반영
