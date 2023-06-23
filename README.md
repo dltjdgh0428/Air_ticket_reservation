@@ -17,5 +17,5 @@ Team : 뉴진스의 하입보이요
 ## 📝프로젝트 최종 보고서
 [[최종보고서] 뉴진스의 하입보이요.pdf](https://github.com/dltjdgh0428/Air_ticket_reservation/files/11853305/default.pdf)
 
-## 📝프로젝트 발표 PPT0
+## 📝프로젝트 발표 PPT
 [뉴진스의 하입보이요.pptx](https://github.com/dltjdgh0428/Air_ticket_reservation/files/11853309/default.pptx)
